@@ -10,6 +10,8 @@ Temat: Zbior.
 */
 #include <iostream>
 #include <conio.h>
+#include <cctype>
+
 using namespace std;
 int dodaj_slowo(string *);
 int usun_slowo(string *);
@@ -18,31 +20,33 @@ string przechowacz;
 
 int main()
 {
-    int wybor;
-
-    cout << "\nPodaj rozmiar tablicy, w ktorm bedziesz przechowywac swoje slowa:\n ?: ";
+    string wybor;
+    cout << "\n                                Witaj!";
+    cout << "\n                   Na poczatek podaj rozmiar tablicy,\n              w ktorej bedziesz przechowywac swoje slowa:\n\n ?: ";
     cin >> rozmiar;
     string *tablica = new string[rozmiar];
+
 
     for(k = 0; k < rozmiar; k++)    // zerowanie tablicy
     {
         tablica[k] = "";
     }
 
-    cout << "\n***************************";
-    cout << "\n*  Panel uzytkownika:     *\n";
-    cout << "*   1. dodaj <napis>      *\n";
-    cout << "*   2. usun <napis>       *\n";
-    cout << "*   3. wypisz             *\n";
-    cout << "*   4. pusty              *\n";
-    cout << "*   5. pelny              *\n";
-    cout << "***************************\n";
-
+    cout << "\n                       ***************************";
+    cout << "\n                       *   Panel uzytkownika:    *\n";
+    cout << "                       *   1. dodaj <napis>      *\n";
+    cout << "                       *   2. usun <napis>       *\n";
+    cout << "                       *   3. wypisz             *\n";
+    cout << "                       *   4. pusty              *\n";
+    cout << "                       *   5. pelny              *\n";
+    cout << "                       ***************************\n";
+    cout << "\nprzyklady uzycia komend:\ndodaj gwiazda, usun gwiazda: \n";
     for(i = 0; i < rozmiar; )
     {
-        cin >> wybor;
+        cin >> wybor;           // decyzja uzytkownika co chce zrobic
+        cout << "______________________________________\n";
 
-        if(wybor == 1)
+        if(wybor == "dodaj")
         {
             if(dodaj_slowo(tablica) == 1)
             {
@@ -52,65 +56,75 @@ int main()
                     if(tablica[x] == "")
                     {
                     tablica[x] = przechowacz;
+                    cout << "Slowo dodane poprawnie!\n";
                     break;
                     }
                 }
             }
             else
             {
-                cout << "| To slowo juz istnieje! Nie moge go dodac. :(\n";
+                cout << "To slowo juz istnieje! Nie moge go dodac. :(\n";
             }
         }
-        if(wybor == 2)
+        if(wybor == "usun")
         {
             if(usun_slowo(tablica) == 1)
             {
                 tablica[h] = "";
-                cout << "| Slowo usuniete poprawnie.\n";
+                cout << "Slowo usuniete poprawnie.\n";
             }
             else
             {
-                cout << "| Nie ma takiego slowa.\n";
+                cout << "Nie ma takiego slowa.\n";
             }
         }
-        if(wybor == 3)
+        if(wybor == "wypisz")
         {
-            cout << "\n\n| Zawartosc tablicy:\n\n";\
+            cout << "\n\n                       Zawartosc tablicy:\n\n";\
             for(k = 0; k < rozmiar; k++)
             {
-                cout << k << " przechowuje slowo: " << tablica[k] << endl;
+                cout << "                       [" << k  << "]"<< " <=> " << tablica[k] << endl;
             }
 
-            cout << "\n***************************";        // dla przypomnienia menu
-            cout << "\n*  Panel uzytkownika:     *\n";
-            cout << "*   1. dodaj <napis>      *\n";
-            cout << "*   2. usun <napis>       *\n";
-            cout << "*   3. wypisz             *\n";
-            cout << "*   4. pusty              *\n";
-            cout << "*   5. pelny              *\n";
-            cout << "***************************\n";
+    cout << "\n                       ***************************";          // przypomnienie menu
+    cout << "\n                       *   Panel uzytkownika:    *\n";
+    cout << "                       *   1. dodaj <napis>      *\n";
+    cout << "                       *   2. usun <napis>       *\n";
+    cout << "                       *   3. wypisz             *\n";
+    cout << "                       *   4. pusty              *\n";
+    cout << "                       *   5. pelny              *\n";
+    cout << "                       ***************************\n";
         }
-        if(wybor == 4)
+        if(wybor == "pusty")
         {
-            for(k = 0; k < rozmiar; k++)
+            for(k = 0; k < rozmiar; k++)        // czyszczenie tablicy
             {
                 tablica[k] = "";
             }
-            cout << "| Tablica jest teraz pusta!\n";
+            cout << "Tablica jest teraz pusta!\n";
         }
-        if(wybor == 5)
+        if(wybor == "pelny")
         {
-                if(i == rozmiar)
+                k = 0;
+
+                for(z = 0; z < rozmiar; z++)    // liczy wystapienia w tablicy do k
                 {
-                    cout << "| Tablica jest zapelniona!\n";
+                    if(tablica[z] != "")
+                    {
+                        k++;
+                    }
                 }
 
+                if(k == rozmiar)
+                {
+                    cout << "Tablica jest zapelniona!\n";
+                }
                 else
                 {
                     int zlicz = 0;
+                    cout << "Tablica nie jest jeszcze zapelniona.\n";
 
-                    cout << "| Tablica nie jest jeszcze zapelniona.\n";
-                    for(k = 0; k < rozmiar; k++)
+                    for(k = 0; k < rozmiar; k++)        // sprawdza stan zapelnienia tablicy
                     {
                         if(tablica[k] != "")
                         {
@@ -121,24 +135,22 @@ int main()
                             continue;
                         }
                     }
-                    cout << "| Stan zapelnienia tablicy: " << zlicz << "/" << rozmiar << endl;
-                    zlicz = 0;  // wyzerowanie zmiennej
+                    cout << "Stan zapelnienia tablicy: " << zlicz << "/" << rozmiar << endl;
+                    zlicz = 0;  // wyzerowanie zmiennej zlicz po wyswietleniu
                 }
 
         }
-        cout << "| Co teraz chcesz zrobic?\n";
+        cout << "______________________________________\n";
     }
 }
 /**************************************************************************/
 int dodaj_slowo(string *tablica)
 {
-
-    cout << "| Podaj swoje slowo ktore chcesz dodac:\n";
     cin >> przechowacz;
 
     for(z = 0; z < rozmiar; z++)
     {
-                if(tablica[z] == przechowacz)
+                if(tablica[z] == przechowacz)       // jesli znajdzie slowo ktore juz jest w tablicy, zwraca 0
                 {
                     return 0;
                 }
@@ -148,13 +160,11 @@ int dodaj_slowo(string *tablica)
 /**************************************************************************/
 int usun_slowo(string *tablica)
 {
-
-    cout << "| Podaj slowo ktore chcesz usunac:\n";
     cin >> przechowacz;
 
     for(z = 0; z < rozmiar; z++)
     {
-                if(tablica[z] == przechowacz)
+                if(tablica[z] == przechowacz)     // jesli znajdzie slowo ktore odpowiada temu ktore chcemy usunac, zwraca 1
                 {
                     h = z;
                     return 1;
