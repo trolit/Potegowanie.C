@@ -41,6 +41,8 @@ int main()
     cout << "                       *   5. pelny              *\n";
     cout << "                       ***************************\n";
     cout << "\nprzyklady uzycia komend:\ndodaj gwiazda, usun gwiazda: \n";
+
+
     for(i = 0; i < rozmiar; )
     {
         cin >> wybor;           // decyzja uzytkownika co chce zrobic
@@ -63,7 +65,7 @@ int main()
             }
             else
             {
-                cout << "To slowo juz istnieje! Nie moge go dodac. :(\n";
+                cout << "To slowo juz istnieje! \nNie moge go dodac. :(\n";
             }
         }
         if(wybor == "usun")
@@ -142,6 +144,7 @@ int main()
         }
         cout << "______________________________________\n";
     }
+
 }
 /**************************************************************************/
 int dodaj_slowo(string *tablica)
@@ -154,8 +157,8 @@ int dodaj_slowo(string *tablica)
                 {
                     return 0;
                 }
-      return 1;
     }
+    return 1;
 }
 /**************************************************************************/
 int usun_slowo(string *tablica)
