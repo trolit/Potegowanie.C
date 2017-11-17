@@ -1,2 +1,2 @@
-# Potegowanie.C
-Liczenie potęgi liczby całkowitej
+# Programowanie C i C++
+Zbior uzytecznych kodow do C/C++.
